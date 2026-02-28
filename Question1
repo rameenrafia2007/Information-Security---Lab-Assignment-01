@@ -1,0 +1,50 @@
+#RAFIA RAMEEN (FA24-BSE-051) INFORMATION SECURITY Lab_ASSIGN_1
+
+def caesar_encrypt(text, shift):  #FUNCTION FOR ENCRYPTION
+    result = ""           #Stores encrypted message
+    shift = shift % 26   # handle large shift values
+
+    for char in text:     #Loop To Go through the message one letter at a time.
+        if char.isupper():      
+            result += chr((ord(char) - 65 + shift) % 26 + 65)  
+               #Turn the letter into a number (A=0, B=1, …), add the shift, 
+               # make sure it stays between 0–25, then turn the number back into a letter
+
+        elif char.islower():
+            result += chr((ord(char) - 97 + shift) % 26 + 97)
+            #Turn the letter into a number (a=0, b=1, …), add the shift, 
+            #make sure it stays between 0–25, then turn the number back into a letter
+
+        else:
+            result += char
+    return result  #Return the encrypted message
+
+
+def caesar_decrypt(text, shift):  #FUNCTION FOR DECRYPTION
+
+    result = ""       #Stores decrypted message
+    shift = shift % 26   # handle large shift values
+
+    for char in text:
+        if char.isupper():
+            result += chr((ord(char) - 65 - shift) % 26 + 65)
+            # Go back by shift positions and turn number back into capital letter
+
+        elif char.islower():
+            result += chr((ord(char) - 97 - shift) % 26 + 97)
+            # Go back by shift positions and turn number back into small letter
+
+        else:
+            result += char
+    return result    #Return decrypted_message
+
+print("===== Caesar Cipher Program =====")
+
+message = input("Enter your message: ")
+shift = int(input("Enter shift value: "))     # Take shift value and convert to integer
+
+encrypted_message = caesar_encrypt(message, shift)      #Encryption Function call
+print("Encrypted Message:", encrypted_message)
+
+decrypted_message = caesar_decrypt(encrypted_message, shift)   #Decryption Function call
+print("Decrypted Message:", decrypted_message)
